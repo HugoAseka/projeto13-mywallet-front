@@ -1,9 +1,5 @@
-import React from 'react';
+import reactDOM from 'react-dom';
+import App from "./components/App"
 
-function App(){
-    return(
-        <>
-            Olá
-        </>
-    )
-}
+
+reactDOM.render(<App /> , document.querySelector(".root"))
