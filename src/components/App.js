@@ -1,24 +1,33 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import UserContext from "../contexts/UserContext";
+import ResetCSS from "../assets/ResetCSS";
+import GlobalStyle from "../assets/GlobalStyle";
+import React from "react";
 import Login from "./Login";
-import Register from "./Register";
-import Home from "./Home";
-import NewIncome from "./NewIncome";
-import NewExpense from "./NewExpense";
+import SignUp from "./SignUp";
+import UserContext from "../contexts/UserContext";
+import { useState } from "react";
+import TransactionsScreen from "./TransactionScreen.js";
+import Income from "./Income";
+import Outcome from "./Outcome";
+
 export default function App() {
-  const [userInfo, setUserInfo] = useState({});
+  const [user, setUser] = useState();
+
   return (
-    <BrowserRouter>
-      <UserContext.Provider value={{ userInfo, setUserInfo }}>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="home" element={<Home />} />
-          <Route path="new-income" element={<NewIncome />} />
-          <Route path="new-expense" element={<NewExpense />} />
-        </Routes>
+    <>
+      <UserContext.Provider value={{ user, setUser }}>
+        <ResetCSS />
+        <GlobalStyle />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/transactions" element={<TransactionsScreen />} />
+            <Route path="/income" element={<Income />} />
+            <Route path="/outcome" element={<Outcome />} />
+          </Routes>
+        </BrowserRouter>
       </UserContext.Provider>
-    </BrowserRouter>
+    </>
   );
 }
