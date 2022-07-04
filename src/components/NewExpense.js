@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-export default function NewIncome() {
+
+export default function NewExpense() {
   const navigate = useNavigate();
   let [amount, setAmount] = useState('');
   let [descryption, setDescryption] = useState('');
@@ -29,7 +30,7 @@ export default function NewIncome() {
           placeholder="Descrição"
           required
         />
-        <button>Entrar</button>
+        <button>Salvar saída</button>
       </Inputs>
     </Container>
   );

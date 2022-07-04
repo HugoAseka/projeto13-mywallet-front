@@ -1,14 +1,39 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import UserContext from "../contexts/UserContext";
+import axios from "axios";
 export default function NewIncome() {
   const navigate = useNavigate();
-  let [amount, setAmount] = useState('');
-  let [descryption, setDescryption] = useState('');
+  let [amount, setAmount] = useState("");
+  let [description, setDescription] = useState("");
+  const now = dayjs().locale("pt-br");
+  const { user, setUser } = useContext(UserContext);
+  console.log(user)
+  const { token } = user;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   function saveEntry(event) {
     event.preventDefault();
 
-    navigate("/home");
+    const newLog = {
+      amount,
+      description,
+      type: "positive",
+      date: now.format("DD/MM/YY"),
+    };
+
+    const promise = axios.post(`localhost:5000/statements`, newLog, config);
+
+    promise.then(() => {
+      setAmount("");
+      setDescription("");
+      navigate("/home");
+    });
   }
 
   return (
@@ -24,12 +49,12 @@ export default function NewIncome() {
         />
         <input
           type="text"
-          value={descryption}
-          onChange={(e) => setDescryption(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           placeholder="Descrição"
           required
         />
-        <button>Entrar</button>
+        <button>Salvar entrada</button>
       </Inputs>
     </Container>
   );

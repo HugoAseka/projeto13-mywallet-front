@@ -32,7 +32,7 @@ export default function Login() {
   const { setUserInfo } = useContext(UserContext);
 
   function success(obj) {
-    setUserInfo({ ...obj.data });
+    setUserInfo({ name: obj.data.name, token: obj.data.token });
     navigate("/home");
   }
   return (

@@ -5,7 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
 import NewIncome from "./NewIncome";
-
+import NewExpense from "./NewExpense";
 export default function App() {
   const [userInfo, setUserInfo] = useState({});
   return (
@@ -16,6 +16,7 @@ export default function App() {
           <Route path="register" element={<Register />} />
           <Route path="home" element={<Home />} />
           <Route path="new-income" element={<NewIncome />} />
+          <Route path="new-expense" element={<NewExpense />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>
